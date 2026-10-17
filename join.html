@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join Pingo</title><link rel="stylesheet" href="style.css"></head>
+<body><main>
+<nav><a href="./">Pingo</a><a href="join.html">Join</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms</a></nav>
+<h1>Join Pingo</h1>
+<p class="meta">Invite-only. For testers personally invited by Nicholas Brueggeman.</p>
+<form id="optin" class="box" action="mailto:r4di4ti0n@gmail.com?subject=Pingo%20opt-in" method="post" enctype="text/plain">
+  <label for="name">Your name</label>
+  <input id="name" name="name" type="text" autocomplete="name" required>
+  <label for="phone">Mobile number</label>
+  <input id="phone" name="mobile" type="tel" autocomplete="tel" placeholder="+1 555 123 4567" required>
+  <label class="consent"><input id="agree" name="consent" type="checkbox" value="yes">
+    <span id="consent-text">I agree to receive recurring automated text messages from Pingo (Nicholas Brueggeman) at the number above about my requests, reminders, benefits and health questions. Message frequency varies. Message and data rates may apply. Reply HELP for help and STOP to cancel. Consent is not a condition of anything. I have read the <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy policy</a>.</span></label>
+  <button id="submit" type="submit" disabled>Join</button>
+  <p class="meta" style="margin-top:14px">Submitting opens an email to the operator with your name, number and the consent text above, which is kept as your opt-in record.</p>
+</form>
+<script>
+const f=document.getElementById('optin'),a=document.getElementById('agree'),b=document.getElementById('submit');
+a.addEventListener('change',()=>{b.disabled=!a.checked});
+f.addEventListener('submit',e=>{e.preventDefault();if(!a.checked)return;
+ const body=['Name: '+f.elements['name'].value,'Mobile: '+f.elements['mobile'].value,'Consent: yes','Consent text: '+document.getElementById('consent-text').innerText,'Submitted: '+new Date().toISOString()].join('\n');
+ location.href='mailto:r4di4ti0n@gmail.com?subject='+encodeURIComponent('Pingo opt-in')+'&body='+encodeURIComponent(body);});
+</script>
+<footer>Questions: <a href="mailto:r4di4ti0n@gmail.com">r4di4ti0n@gmail.com</a></footer>
+</main></body></html>
