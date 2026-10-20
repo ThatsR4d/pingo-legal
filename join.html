@@ -10,16 +10,16 @@
   <input id="name" name="name" type="text" autocomplete="name" required>
   <label for="phone">Mobile number</label>
   <input id="phone" name="mobile" type="tel" autocomplete="tel" placeholder="+1 555 123 4567" required>
+  <p class="meta"><strong>Text messages are optional.</strong> You can use Pingo without agreeing to texts: leave the box below unchecked and we'll set you up on Telegram instead, and Pingo won't text you.</p>
   <label class="consent"><input id="agree" name="consent" type="checkbox" value="yes">
-    <span id="consent-text">I agree to receive recurring automated text messages from Pingo (Nicholas Brueggeman) at the number above about my requests, reminders, account notifications, benefits and health questions. Message frequency varies. Message and data rates may apply. Reply HELP for help and STOP to cancel. Consent is not a condition of anything. I have read the <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy policy</a>.</span></label>
-  <button id="submit" type="submit" disabled>Sign up</button>
-  <p class="meta" style="margin-top:14px">Submitting sends your name, number and the consent text above to Pingo by email; it is kept as your opt-in record. When your access is activated, Pingo texts you a confirmation.</p>
+    <span id="consent-text">I agree to receive recurring automated text messages from Pingo (Nicholas Brueggeman) at the number above about my requests, reminders, account notifications, benefits and health questions. Message frequency varies. Message and data rates may apply. Reply HELP for help and STOP to cancel. Optional: consent is not a condition of signing up or of using Pingo. I have read the <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy policy</a>.</span></label>
+  <button id="submit" type="submit">Sign up</button>
+  <p class="meta" style="margin-top:14px">Submitting sends your name, number and your choice above to Pingo by email; if you checked the box, it is kept as your opt-in record. When your access is activated, Pingo texts you a confirmation if you agreed to texts, or sends you a Telegram link if you didn't.</p>
 </form>
 <script>
-const f=document.getElementById('optin'),a=document.getElementById('agree'),b=document.getElementById('submit');
-a.addEventListener('change',()=>{b.disabled=!a.checked});
-f.addEventListener('submit',e=>{e.preventDefault();if(!a.checked)return;
- const body=['Name: '+f.elements['name'].value,'Mobile: '+f.elements['mobile'].value,'Consent: yes','Consent text: '+document.getElementById('consent-text').innerText,'Submitted: '+new Date().toISOString()].join('\n');
+const f=document.getElementById('optin'),a=document.getElementById('agree');
+f.addEventListener('submit',e=>{e.preventDefault();
+ const body=['Name: '+f.elements['name'].value,'Mobile: '+f.elements['mobile'].value,'Text messages: '+(a.checked?'yes (consented)':'no (use Telegram, no texts)'),...(a.checked?['Consent text: '+document.getElementById('consent-text').innerText]:[]),'Submitted: '+new Date().toISOString()].join('\n');
  location.href='mailto:r4di4ti0n@gmail.com?subject='+encodeURIComponent('Pingo opt-in')+'&body='+encodeURIComponent(body);});
 </script>
 <footer>Questions: <a href="mailto:r4di4ti0n@gmail.com">r4di4ti0n@gmail.com</a></footer>
